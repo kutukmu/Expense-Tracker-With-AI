@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { checkUser } from "@/lib/checkUser";
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
