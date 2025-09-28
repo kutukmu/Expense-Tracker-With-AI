@@ -16,7 +16,7 @@ datasource db {
 
 model User{
   id String @id @default(uuid())
-  clerkcUserId String @unique
+  clerckUserId String @unique
   email String @unique
   name String?
   imageUrl String?
@@ -31,7 +31,7 @@ model Record{
   amount Float
   category String @default("Other")
   userId String
-  user User? @relation(fields:[userId], references: [clerkcUserId], onDelete:Cascade)
+  user User? @relation(fields:[userId], references: [clerckUserId], onDelete:Cascade)
   createdAt DateTime @default(now())
   @@index([userId])
 
