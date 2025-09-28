@@ -1,7 +1,6 @@
 import { verifyWebhook } from "@clerk/nextjs/webhooks";
 import { NextRequest } from "next/server";
-import prisma from "@/lib/prisma";
-
+import { prismadb } from "../../../../lib/prisma";
 export async function POST(req: NextRequest) {
   try {
     const evt = await verifyWebhook(req);
@@ -13,11 +12,13 @@ export async function POST(req: NextRequest) {
 
     if (eventType === "user.created") {
       const { id, email_addresses, first_name, last_name } = evt.data;
-      await prisma.user.upsert({
-        where: { clerkId: id },
+      await prismadb.user.upsert({
+        where: {
+          clerckUserId: id,
+        },
         update: {},
         create: {
-          clerkId: id,
+          clerckUserId: id,
           email: email_addresses[0].email_address,
           name: `${first_name} ${last_name}`,
         },

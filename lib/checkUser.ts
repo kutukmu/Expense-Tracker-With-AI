@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 
-import { db } from "./prisma";
+import { prismadb } from "./prisma";
 
 export const checkUser = async () => {
   const user = await currentUser();
@@ -9,7 +9,7 @@ export const checkUser = async () => {
     return null;
   }
 
-  const loggedInUser = await db.user.findUnique({
+  const loggedInUser = await prismadb.user.findUnique({
     where: {
       clerckUserId: user.id,
     },
@@ -19,7 +19,7 @@ export const checkUser = async () => {
     return loggedInUser;
   }
 
-  const newUser = await db.user.create({
+  const newUser = await prismadb.user.create({
     data: {
       clerckUserId: user.id,
       name: `${user.firstName} ${user.lastName}`,
