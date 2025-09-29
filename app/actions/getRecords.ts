@@ -4,7 +4,7 @@ import { prismadb } from "@/lib/prisma";
 import { Record } from "@/types/Record";
 import { auth } from "@clerk/nextjs/server";
 
-async function getRecords(): Promise<{
+export async function getRecords(): Promise<{
   records?: Record[];
   error?: string;
 }> {
