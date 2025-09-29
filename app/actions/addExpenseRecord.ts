@@ -1,6 +1,6 @@
 "use server";
 import { auth } from "@clerk/nextjs/server";
-import { db } from "@/lib/prisma";
+import { prismadb } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 interface RecordData {
@@ -38,7 +38,7 @@ async function addExpenseRecord(formData: FormData): Promise<RecordResult> {
   const amount: number = parseFloat(amountValue.toString()); // Parse amount as number
   const category: string = categoryValue.toString(); // Ensure category is a string
   // Convert date to ISO-8601 format while preserving the user's input date
-  let date: string;
+  let createdAt: string;
   try {
     // Parse the date string (YYYY-MM-DD format) and create a date at noon UTC to avoid timezone issues
     const inputDate = dateValue.toString();
@@ -46,7 +46,7 @@ async function addExpenseRecord(formData: FormData): Promise<RecordResult> {
     const dateObj = new Date(
       Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0)
     );
-    date = dateObj.toISOString();
+    createdAt = dateObj.toISOString();
   } catch (error) {
     console.error("Invalid date format:", error); // Log the error
     return { error: "Invalid date format" };
@@ -62,12 +62,12 @@ async function addExpenseRecord(formData: FormData): Promise<RecordResult> {
 
   try {
     // Create a new record (allow multiple expenses per day)
-    const createdRecord = await db.record.create({
+    const createdRecord = await prismadb.record.create({
       data: {
         text,
         amount,
         category,
-        date, // Save the date to the database
+        createdAt, // Save the date to the database
         userId,
       },
     });
@@ -76,7 +76,7 @@ async function addExpenseRecord(formData: FormData): Promise<RecordResult> {
       text: createdRecord.text,
       amount: createdRecord.amount,
       category: createdRecord.category,
-      date: createdRecord.date?.toISOString() || date,
+      date: createdRecord.createdAt?.toISOString() || createdAt,
     };
 
     revalidatePath("/");
