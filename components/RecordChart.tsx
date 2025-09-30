@@ -85,7 +85,7 @@ const RecordChart = async () => {
         <BarChart
           records={records.map((record) => ({
             ...record,
-            date: String(record.date),
+            date: String(record.createdAt),
           }))}
         />
       </div>
