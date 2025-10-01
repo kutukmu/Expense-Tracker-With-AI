@@ -47,8 +47,6 @@ async function addExpenseRecord(formData: FormData): Promise<RecordResult> {
       Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0)
     );
     createdAt = dateObj.toISOString();
-
-    console.log(createdAt);
   } catch (error) {
     console.error("Invalid date format:", error); // Log the error
     return { error: "Invalid date format" };

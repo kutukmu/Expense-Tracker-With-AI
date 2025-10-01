@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getAIInsights } from "@/app/actions/getAIInsights";
-import { generateAIAnswer } from "@/lib/ai";
+import { generateInsightAnswer } from "@/app/actions/generateInsightAnswer";
 
 interface InsightData {
   id: string;

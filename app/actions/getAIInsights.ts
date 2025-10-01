@@ -63,6 +63,8 @@ export async function getAIInsights(): Promise<AIInsight[]> {
 
     // Generate AI insights
     const insights = await generateExpenseInsights(expenseData);
+
+    console.log(insights);
     return insights;
   } catch (error) {
     console.error("Error getting AI insights:", error);
