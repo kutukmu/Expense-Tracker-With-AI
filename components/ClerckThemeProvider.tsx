@@ -2,7 +2,7 @@
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { useTheme } from "@/contexts/themeContext";
+import { useTheme } from "@/contexts/allThemeContext";
 
 interface ClerkThemeProviderProps {
   children: React.ReactNode;

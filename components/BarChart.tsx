@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { useTheme } from "@/contexts/themeContext";
+import { useTheme } from "@/contexts/allThemeContext";
 import { useState, useEffect } from "react";
 
 // Register Chart.js components
