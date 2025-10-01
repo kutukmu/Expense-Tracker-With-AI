@@ -25,7 +25,7 @@ ChartJS.register(
 
 // Define the type for a record
 interface Record {
-  createdAt: string; // ISO date string
+  date: string; // ISO date string
   amount: number; // Amount spent
   category: string; // Expense category
 }
@@ -59,7 +59,7 @@ const BarChart = ({ records }: { records: Record[] }) => {
 
     records.forEach((record) => {
       // Parse the date string properly and extract just the date part (YYYY-MM-DD)
-      const dateObj = new Date(record.createdAt);
+      const dateObj = new Date(record.date);
       // Use UTC methods to avoid timezone issues
       const year = dateObj.getUTCFullYear();
       const month = String(dateObj.getUTCMonth() + 1).padStart(2, "0");
@@ -76,7 +76,7 @@ const BarChart = ({ records }: { records: Record[] }) => {
         dateMap.set(dateKey, {
           total: record.amount,
           categories: [record.category],
-          originalDate: record.createdAt, // Keep original ISO date for sorting
+          originalDate: record.date, // Keep original ISO date for sorting
         });
       }
     });
