@@ -1,8 +1,8 @@
 export interface Record {
-  id: String;
-  text: String;
-  amount: Number;
-  category: String;
-  userId: String;
+  id: string;
+  text: string;
+  amount: number;
+  category: string;
+  userId: string;
   createdAt: Date;
 }
